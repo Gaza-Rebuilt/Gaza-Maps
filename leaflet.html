@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaza Map</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+           
+        #mapid { height: 400px;
+        width: 822px; }
+    </style>
+</head>
+<body>
+    <!-- Your content goes here -->
+    <h1>Map of universities in Gaza</h1>
+    <div id="mapid"></div>
+    <script>
+        //var mymap = L.map('mapid').setView([31.511004057188533, 34.46761781727856], 12);
+        var mymap = L.map('mapid');
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(mymap);
+        // Add a marker
+       // L.marker([31.5079, 34.4376]).addTo(mymap).bindPopup("Hello, Gaza!");
+    
+       // Add multiple markers
+       var markerCoordinates = [
+        [31.5079, 34.4376], // Al-Azhar University-Gaza
+        [31.5244, 34.4812], // Islamic University of Gaza
+        [31.5056, 34.4666], // University College of Applied Sciences
+        [31.323, 34.2711], // Al-Quds Open University
+        [31.5006, 34.4663], // Gaza University
+        [31.4564, 34.3832], // University of Palestine
+        [31.5050, 34.4667], // Al-Aqsa University
+        [31.4250, 34.3556], // Palestine Technical College
+        [31.537000, 34.445835]  // Palestine University
+        // Add more coordinates as needed
+    ];
+    var bounds = markerCoordinates; // Use the marker coordinates as the bounds
+
+    mymap.fitBounds(bounds); // Adjust the view to fit the bounds
+    
+    var popupTexts = [
+        "Al-Azhar University-Gaza",
+        "Islamic University of Gaza",
+        "University College of Applied Sciences",
+        "Al-Quds Open University",
+        "Gaza University",
+        "University of Palestine",
+        "Al-Aqsa University",
+        "Palestine Technical College",
+        "Palestine University"
+        // Add more texts as needed
+    ];
+
+    for (var i = 0; i < markerCoordinates.length; i++) {
+        var marker = L.marker(markerCoordinates[i]).addTo(mymap);
+        var popup = L.popup().setLatLng(markerCoordinates[i]).setContent(popupTexts[i]).addTo(mymap);
+    }
+    
+    </script>
+</body>
+</html>
